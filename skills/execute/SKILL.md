@@ -25,13 +25,6 @@ Load the plan, review it critically, execute using teams for independent work an
 - Execute sequentially in current session
 - Each task follows its verification steps before the next begins
 
-## Checkpoints — every 3-5 tasks
-
-- Run full test suite
-- Dispatch code review via `review` skill
-- Fix issues before proceeding to next batch
-- Report: what was done, verification output, issues found
-
 ## After all tasks
 
 - Final full verification: test suite, linter, build

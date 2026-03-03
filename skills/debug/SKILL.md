@@ -1,43 +1,116 @@
 ---
 name: debug
-description: Investigate, trace root cause, fix, harden. Understand before fixing.
+description: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes. Understand before fixing.
 ---
 
 # Debug
 
-Understand the bug before attempting fixes. If 3+ fixes fail, stop and question the architecture.
+## The Iron Law
+
+```
+NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
+```
+
+If you haven't completed Phase 1, you cannot propose fixes. No exceptions. Not even when it "seems obvious." Especially not when it seems obvious.
 
 ## Phase 1 — Investigate
 
-- Read error messages completely
-- Reproduce consistently
-- Check recent changes: `git log`, `git diff`
-- Log data at component boundaries
+Do this BEFORE attempting ANY fix:
 
-## Phase 2 — Trace root cause
+**Read error messages completely.** Don't skip past them. They often contain the exact answer. Read stack traces, note line numbers, file paths, error codes.
 
-- Start at the symptom, trace backward through the call stack
-- At each level: "What called this? Where did this data come from?"
-- If manual tracing stalls, add instrumentation (`console.error` with stack traces) at key boundaries
-- Find where the bad data originates — that's your root cause
+**Reproduce consistently.** Can you trigger it reliably? What are the exact steps? If not reproducible, gather more data — don't guess.
+
+**Check recent changes.** `git log`, `git diff`. New dependencies, config changes, environment differences.
+
+**Multi-component systems — add diagnostic instrumentation FIRST:**
+
+```bash
+# Log at EVERY component boundary, run ONCE, find where it breaks
+# Layer 1: Entry
+echo "=== Input data: ==="
+echo "VALUE: ${VALUE:+SET}${VALUE:-UNSET}"
+
+# Layer 2: Processing
+echo "=== After transform: ==="
+echo "RESULT: $RESULT"
+
+# Layer 3: Output
+echo "=== Final state: ==="
+ls -la "$OUTPUT_PATH"
+```
+
+This reveals WHICH layer fails. Fix instrumentation first, then fix the bug.
+
+**Trace backward through the call stack:**
+
+Start at the symptom. At each level ask: "What called this? Where did this data come from?" Keep going until you find where the bad data originates.
+
+When manual tracing stalls, add stack trace instrumentation:
+
+```typescript
+async function riskyOperation(directory: string) {
+  const stack = new Error().stack;
+  console.error('DEBUG riskyOperation:', {
+    directory,
+    cwd: process.cwd(),
+    nodeEnv: process.env.NODE_ENV,
+    stack,
+  });
+  // ... operation
+}
+```
+
+Use `console.error()` in tests — logger may be suppressed. Log BEFORE the dangerous operation, not after it fails.
+
+## Phase 2 — Pattern Analysis
+
+**Find working examples.** Locate similar working code in the same codebase.
+
+**Compare completely.** If implementing a pattern, read the reference implementation completely — every line. Don't skim.
+
+**List every difference** between working and broken. Don't assume "that can't matter."
+
+**Understand dependencies.** What other components, config, environment does this need?
 
 ## Phase 3 — Fix
 
-- Form a single hypothesis — write it down
-- Propose the robust fix, not a shortcut or workaround
+- Form a single hypothesis — write it down: "I think X because Y"
+- Make the smallest possible change. One variable at a time.
 - Write a failing test that reproduces the bug
 - Implement the fix, verify the test passes
-- If the fix doesn't work: return to Phase 1, don't stack another guess
-- If you need user context to understand the expected behavior, use `AskUserQuestion`
+- If the fix doesn't work: return to Phase 1 with new information. Don't stack another guess.
+
+**If 3+ fixes fail: STOP.**
+
+You're not dealing with a bug — you're dealing with an architectural problem. Each fix revealing a new problem elsewhere means you're treating symptoms. Use `AskUserQuestion` to discuss fundamentals with the user before attempting more fixes.
 
 ## Phase 4 — Harden
 
-- Validate at every layer the data passes through
-- Entry point validation → business logic checks → environment guards
-- Make the bug structurally impossible, not just patched
+Make the bug structurally impossible, not just patched. Validate at EVERY layer data passes through:
 
-## Stop conditions
+**Layer 1 — Entry point validation:** Reject invalid input at the boundary
+**Layer 2 — Business logic checks:** Ensure data makes sense for this operation
+**Layer 3 — Environment guards:** Prevent dangerous operations in specific contexts (e.g., refuse `git init` outside tmpdir during tests)
+**Layer 4 — Debug instrumentation:** Log context for forensics
 
-- 3+ fix attempts failed → question the architecture, not the fix
-- Each fix reveals a new problem elsewhere → you're treating symptoms
-- "Quick fix now, investigate later" → investigate now
+All four layers are necessary. During testing, each catches bugs the others miss — different code paths bypass entry validation, mocks bypass business logic, edge cases need environment guards.
+
+## Finding Which Test Pollutes State
+
+Use the bisection script at @find-polluter.sh:
+
+```bash
+./find-polluter.sh '.git' 'src/**/*.test.ts'
+```
+
+Runs tests one-by-one, stops at first polluter.
+
+## Red Flags — STOP and return to Phase 1
+
+- "Quick fix for now, investigate later"
+- "Just try changing X and see"
+- "It's probably X, let me fix that"
+- Proposing solutions before tracing data flow
+- "One more fix attempt" when you've already tried 2+
+- Each fix reveals new problem in different place

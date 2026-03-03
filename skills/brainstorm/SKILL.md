@@ -1,11 +1,54 @@
 ---
 name: brainstorm
-description: Turn rough ideas into design specs through deep collaborative interview. Use before writing code or plans.
+description: Turn rough ideas into design specs through deep collaborative interview. YOU MUST USE before writing code or plans.
 ---
 
 # Brainstorm
 
 Assume you are a PM and senior developer. Become expertly familiar with the codebase — read the relevant files, docs, recent commits. Understand the project deeply before asking a single question.
+
+Do NOT write any code, scaffold any project, or take any implementation action until the design is approved. Every project goes through this process — even "simple" ones. The design can be short, but it must exist and be approved.
+
+## Flow
+
+```dot
+digraph brainstorm {
+    "Explore project context" [shape=box];
+    "Interview deeply" [shape=box];
+    "Propose robust approach" [shape=box];
+    "User approves approach?" [shape=diamond];
+    "Write full design spec" [shape=box];
+    "Review via md-review-plus" [shape=box];
+    "User approves spec?" [shape=diamond];
+    "Commit design doc" [shape=box];
+    "Invoke plan skill" [shape=doublecircle];
+
+    "Explore project context" -> "Interview deeply";
+    "Interview deeply" -> "Propose robust approach";
+    "Propose robust approach" -> "User approves approach?";
+    "User approves approach?" -> "Interview deeply" [label="no, dig deeper"];
+    "User approves approach?" -> "Write full design spec" [label="yes"];
+    "Write full design spec" -> "Review via md-review-plus";
+    "Review via md-review-plus" -> "User approves spec?";
+    "User approves spec?" -> "Write full design spec" [label="no, revise"];
+    "User approves spec?" -> "Commit design doc" [label="yes"];
+    "Commit design doc" -> "Invoke plan skill";
+}
+```
+
+The terminal state is invoking the `plan` skill. No other skill. Not `execute`, not `tdd`, not anything else.
+
+## Checklist
+
+Create a TodoWrite item for each:
+
+1. Explore project context — files, docs, recent commits
+2. Interview user via `AskUserQuestion` until design is fully understood
+3. Propose the robust approach via `AskUserQuestion` for approval
+4. Write complete design spec to `docs/plans/YYYY-MM-DD-<topic>-design.md`
+5. Review via `md-review-plus <file> --review`, iterate until approved
+6. Commit the design doc
+7. Hand off to `plan` skill
 
 ## Interview
 
@@ -21,11 +64,11 @@ When you have enough context, propose the single most robust, correct approach. 
 
 ## Write the spec
 
-Write the complete design spec to `docs/plans/YYYY-MM-DD-<topic>-design.md` in one shot. Not section-by-section. The full document.
+Write the complete design spec in one shot. Not section-by-section. The full document.
 
 Include: goal, constraints, architecture, components, data flow, error handling, testing approach, and all decisions from the interview.
 
-The spec must include a **phase tracking table** so anyone can tell what's been implemented, what remains, what's tested, and what's pushed:
+The spec must include a **phase tracking table**:
 
 ```
 | Phase | Description | Status | Tested | Pushed |
@@ -36,13 +79,10 @@ The spec must include a **phase tracking table** so anyone can tell what's been 
 
 ## Review
 
-Write the full document, then review with `md-review-plus <file> --review`. User approves, rejects, or comments in the browser. Iterate until approved.
-
-## Hand off
-
-"Ready to plan implementation?" → `plan` skill.
+Write the full document, then review with `md-review-plus <file> --review`. User approves, rejects, or comments in the browser. Iterate until approved. Commit when done.
 
 ## Principles
 
 - YAGNI ruthlessly — if it might not be needed, cut it
 - Write complete specs, not drip-feeds
+- Every project gets a design, no exceptions
