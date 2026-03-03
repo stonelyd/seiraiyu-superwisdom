@@ -1,0 +1,45 @@
+---
+name: execute
+description: Execute implementation plans using agent teams for parallel work and sequential agents for dependent tasks.
+---
+
+# Execute
+
+Load the plan, review it critically, execute using teams for independent work and sequential agents for dependent work.
+
+## Before starting
+
+1. Read the plan file completely
+2. Review critically — raise concerns before writing any code
+3. Create TodoWrite tracker for all tasks
+4. Identify which tasks are independent vs dependent
+
+## Execution
+
+**Independent tasks (parallelize):**
+- `TeamCreate` with worker agents in worktree isolation
+- Assign tasks via `TaskUpdate`
+- Workers execute, verify, commit, mark complete
+
+**Dependent tasks (serialize):**
+- Execute sequentially in current session
+- Each task follows its verification steps before the next begins
+
+## Checkpoints — every 3-5 tasks
+
+- Run full test suite
+- Dispatch code review via `review` skill
+- Fix issues before proceeding to next batch
+- Report: what was done, verification output, issues found
+
+## After all tasks
+
+- Final full verification: test suite, linter, build
+- Final code review of complete implementation
+- Hand off to `git-flow` skill for branch completion
+
+## When to stop
+
+- Blocker mid-batch → stop, use `AskUserQuestion` to get guidance
+- Plan has gaps → surface them via `AskUserQuestion`, don't guess
+- Verification fails repeatedly → use `debug` skill, don't force it
