@@ -1,0 +1,17 @@
+{
+  "name": "superwisdom",
+  "version": "1.0.0",
+  "description": "Streamlined development workflow skills. Professional, team-oriented, lean.",
+  "skills": [
+    "skills/boot",
+    "skills/brainstorm",
+    "skills/plan",
+    "skills/execute",
+    "skills/tdd",
+    "skills/debug",
+    "skills/review",
+    "skills/teams",
+    "skills/git-flow",
+    "skills/verify"
+  ]
+}
