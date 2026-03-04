@@ -1,0 +1,12 @@
+{
+  "name": "superwisdom",
+  "description": "Streamlined development workflow skills. Professional, team-oriented, lean.",
+  "version": "1.0.0",
+  "author": {
+    "name": "stonelyd"
+  },
+  "homepage": "https://github.com/stonelyd/seiraiyu-superwisdom",
+  "repository": "https://github.com/stonelyd/seiraiyu-superwisdom",
+  "license": "MIT",
+  "keywords": ["skills", "tdd", "debugging", "brainstorm", "planning", "workflows", "teams"]
+}
