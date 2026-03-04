@@ -14,7 +14,17 @@ Assume the engineer executing this plan has zero codebase context. Give them eve
 3. If anything is ambiguous, use `AskUserQuestion` to clarify before writing the plan.
 4. Write the full plan to `docs/plans/YYYY-MM-DD-<feature>-plan.md`.
 5. Review with `md-review-plus <file> --review`. Iterate until approved.
-6. "Ready to execute?" → `execute` skill.
+6. After plan is written and reviewed, present the handoff:
+
+```
+Plan complete: `docs/plans/YYYY-MM-DD-<feature>-plan.md`
+
+To execute with a clean context, run `/clear` then paste:
+
+/execute docs/plans/YYYY-MM-DD-<feature>-plan.md
+```
+
+Use the actual plan file path. The user copies one line after clearing.
 
 ## Plan header
 
