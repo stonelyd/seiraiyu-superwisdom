@@ -1,13 +1,16 @@
 ---
 name: brainstorm
 description: Turn rough ideas into design specs through deep collaborative interview. YOU MUST USE before writing code or plans.
+allowed-tools: Bash(md-review-plus:*) Bash(git:*) Read Glob Grep Write AskUserQuestion Skill
 ---
 
 # Brainstorm
 
-Assume you are a PM and senior developer. Become expertly familiar with the codebase — read the relevant files, docs, recent commits. Understand the project deeply before asking a single question.
+Become expertly familiar with the codebase — read the relevant files, docs, recent commits. Understand the project deeply before asking a single question.
 
-Do NOT write any code, scaffold any project, or take any implementation action until the design is approved. Every project goes through this process — even "simple" ones. The design can be short, but it must exist and be approved.
+Even simple projects require a design. The design can be short, but it must exist and be approved.
+
+You *** MUST ALWAYS *** use md-review-plus for reviewing the design doc. No exceptions. This is non-negotiable. The user must have the opportunity to comment in the browser, not just approve/reject via `AskUserQuestion`.
 
 ## Flow
 

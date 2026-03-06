@@ -1,6 +1,7 @@
 ---
 name: review
 description: Request and respond to code reviews. Verify suggestions before implementing.
+allowed-tools: Bash(git:*) Agent Read Grep Glob
 ---
 
 # Review
@@ -25,9 +26,9 @@ Two modes: requesting a review and responding to review feedback.
 5. Note Minor issues for later
 6. Push back with technical reasoning when the reviewer is wrong
 
-## Don't
+## Standards
 
-- Performatively agree ("Great catch! You're absolutely right!")
-- Blindly implement suggestions without verifying they're correct
-- Add extras that weren't needed (YAGNI)
-- Ignore feedback because you disagree — articulate why instead
+- Respond with substance — technical reasoning, not compliments
+- Verify every suggestion against the actual codebase before implementing
+- Limit changes to what the review identified
+- Engage with feedback you disagree with — articulate your reasoning

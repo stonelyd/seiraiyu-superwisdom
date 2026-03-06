@@ -1,6 +1,7 @@
 ---
 name: plan
 description: Create detailed implementation plans with bite-sized tasks. Exact file paths, complete code, verification steps.
+allowed-tools: Read Glob Grep Write AskUserQuestion Bash(md-review-plus:*) Bash(git:*) Skill
 ---
 
 # Plan

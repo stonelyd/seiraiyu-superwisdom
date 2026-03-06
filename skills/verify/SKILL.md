@@ -1,6 +1,7 @@
 ---
 name: verify
 description: Run verification before claiming work is done. Evidence before assertions.
+allowed-tools: Bash Read
 ---
 
 # Verify
@@ -17,14 +18,11 @@ Before claiming work is complete, fixed, or passing — run the proof.
 
 Applies to: test results, build output, bug fixes, linter output, deployments, agent reports.
 
-## Don't say
+## Say
 
-- "Should work now"
-- "Probably passes"
-- "Seems fixed"
-- "Tests were passing earlier"
-
-Run it. Show the output.
+- "Tests pass — here's the output"
+- "Build exits 0 — confirmed just now"
+- "Bug fix verified — reproduction test passes"
 
 ## Reference
 

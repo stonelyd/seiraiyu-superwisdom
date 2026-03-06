@@ -1,6 +1,7 @@
 ---
 name: boot
 description: Meta-skill loaded on every conversation. Check for matching skills before starting any task.
+allowed-tools: Skill Read
 ---
 
 # Boot

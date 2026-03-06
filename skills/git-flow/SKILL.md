@@ -1,6 +1,7 @@
 ---
 name: git-flow
 description: Worktree setup and branch completion lifecycle. Start isolated work, finish with merge/PR/keep/discard.
+allowed-tools: Bash(git:*) Bash(gh:*) Bash(npm:*) Bash(pip:*) Read AskUserQuestion EnterWorktree
 ---
 
 # Git Flow
@@ -28,17 +29,13 @@ One skill for the full branch lifecycle: create an isolated worktree, do the wor
 3. Execute the chosen option
 4. Clean up worktree for merge and discard options
 
-## Red Flags
+## Safeguards
 
-**Never:**
-- Create worktree without verifying it's ignored (project-local)
-- Skip baseline test verification
-- Proceed with failing tests without asking
-- Assume directory location when ambiguous
-- Skip CLAUDE.md check
-
-**Always:**
-- Follow directory priority: existing > CLAUDE.md > ask
+- Verify the worktree directory is in `.gitignore` before creating
 - Verify directory is ignored for project-local
+- Run baseline tests and confirm they pass
+- Use `AskUserQuestion` when tests fail before proceeding
+- Resolve ambiguous directory locations by checking CLAUDE.md, then asking
+- Follow directory priority: existing > CLAUDE.md > ask
 - Auto-detect and run project setup
 - Verify clean test baseline

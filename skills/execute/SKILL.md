@@ -1,6 +1,7 @@
 ---
 name: execute
 description: Execute implementation plans using agent teams for parallel work and sequential agents for dependent tasks.
+allowed-tools: TeamCreate TaskCreate TaskUpdate TaskList Agent Bash Read Edit Write Skill AskUserQuestion
 ---
 
 # Execute
@@ -31,8 +32,8 @@ Load the plan, review it critically, execute using teams for independent work an
 - Final code review of complete implementation
 - Hand off to `git-flow` skill for branch completion
 
-## When to stop
+## When to escalate
 
-- Blocker mid-batch → stop, use `AskUserQuestion` to get guidance
-- Plan has gaps → surface them via `AskUserQuestion`, don't guess
-- Verification fails repeatedly → use `debug` skill, don't force it
+- Blocker mid-batch → pause and use `AskUserQuestion` for guidance
+- Plan has gaps → surface them via `AskUserQuestion` before continuing
+- Verification fails repeatedly → switch to the `debug` skill

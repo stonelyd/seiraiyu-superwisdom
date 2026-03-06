@@ -1,6 +1,7 @@
 ---
 name: tdd
 description: Red-green-refactor discipline. Write the test first, watch it fail, write minimal code to pass.
+allowed-tools: Bash Read Edit Write
 ---
 
 # TDD
@@ -29,7 +30,7 @@ Repeat for the next behavior.
 
 ## Anti-Patterns
 
-### Don't test mock behavior
+### Test real behavior
 
 ```typescript
 // BAD: testing that the mock exists
@@ -47,7 +48,7 @@ test('renders sidebar', () => {
 
 Before asserting on any mock element: "Am I testing real behavior or mock existence?" If mock existence — delete the assertion or unmock the component.
 
-### Don't add test-only methods to production code
+### Keep test-only methods in test utilities
 
 ```typescript
 // BAD: destroy() only used in tests
@@ -65,7 +66,7 @@ export async function cleanupSession(session: Session) {
 
 Before adding any method to a production class: "Is this only used by tests?" If yes — put it in test utilities.
 
-### Don't mock without understanding dependencies
+### Understand dependencies before mocking
 
 Before mocking any method:
 1. What side effects does the real method have?
@@ -75,7 +76,7 @@ Before mocking any method:
 
 Red flags: "I'll mock this to be safe." "This might be slow, better mock it." Mocking without understanding the dependency chain.
 
-### Don't create incomplete mocks
+### Mock complete data structures
 
 Mock the COMPLETE data structure as it exists in reality, not just fields your immediate test uses. Partial mocks hide structural assumptions and fail silently when downstream code depends on fields you didn't include.
 
@@ -143,9 +144,9 @@ Requirements: wait for triggering condition first, based on known timing (not gu
 - No timeout — loops forever. Always include timeout with clear error message.
 - Stale data — caching state before loop. Call the getter inside the loop for fresh data.
 
-## Watch for
+## Gut checks
 
-- "Too simple to need a test" → write it anyway, takes 30 seconds
-- "I'll write the test after" → test-after proves nothing about failure detection
-- "Just this once" → discipline only works if it's every time
-- Test passes on first run → you didn't verify it catches failures
+- Feels too simple → write the test anyway, takes 30 seconds
+- Tempted to code first → test-first proves the test catches failures
+- Tempted to skip once → discipline works because it's every time
+- Test passes on first run → flip the assertion to verify it can fail

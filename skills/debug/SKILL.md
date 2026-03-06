@@ -1,6 +1,7 @@
 ---
 name: debug
 description: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes. Understand before fixing.
+allowed-tools: Bash Read Edit Grep Glob AskUserQuestion
 ---
 
 # Debug
@@ -8,10 +9,10 @@ description: Use when encountering any bug, test failure, or unexpected behavior
 ## The Iron Law
 
 ```
-NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
+COMPLETE ROOT CAUSE INVESTIGATION BEFORE EVERY FIX
 ```
 
-If you haven't completed Phase 1, you cannot propose fixes. No exceptions. Not even when it "seems obvious." Especially not when it seems obvious.
+Complete Phase 1 first, every time. Especially when the answer "seems obvious" — that's when investigation matters most.
 
 ## Phase 1 — Investigate
 
@@ -106,11 +107,10 @@ Use the bisection script at @find-polluter.sh:
 
 Runs tests one-by-one, stops at first polluter.
 
-## Red Flags — STOP and return to Phase 1
+## Checkpoints — return to Phase 1 when you notice
 
-- "Quick fix for now, investigate later"
-- "Just try changing X and see"
-- "It's probably X, let me fix that"
-- Proposing solutions before tracing data flow
-- "One more fix attempt" when you've already tried 2+
-- Each fix reveals new problem in different place
+- Urge to offer the quick fix → stop, investigate more
+- Urge to skip investigation → run the investigation
+- Urge to guess → trace the data flow first
+- Urge to try "one more fix" after 2+ attempts → step back, ask the user
+- Each fix revealing a new problem → treat it as architectural, discuss with user
