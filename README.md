@@ -16,7 +16,9 @@ A consolidated replacement for [superpowers](https://github.com/obra/superpowers
 |-------|---------|
 | **boot** | Meta-skill — check for matching skills before any task |
 | **brainstorm** | Turn rough ideas into design specs through collaborative interview |
+| **brainstorm-goal** | Goal-oriented brainstorm — design spec's §1 is a machine-verifiable Goal |
 | **plan** | Create bite-sized implementation plans with exact paths, code, and verification |
+| **plan-goal** | Goal-oriented plan — distills the Goal into a copy-paste /goal + /execute handoff |
 | **execute** | Execute plans using agent teams (parallel) and sequential agents (dependent) |
 | **tdd** | Red-green-refactor with anti-patterns and async timing guidance |
 | **debug** | Four-phase: investigate → trace root cause → fix → harden |
