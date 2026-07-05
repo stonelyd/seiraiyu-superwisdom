@@ -2,6 +2,7 @@
 name: brainstorm-goal
 description: Goal-oriented brainstorm — turn rough ideas into design specs whose §1 is a machine-verifiable Goal, so the plan step can emit a copy-paste /goal + /execute handoff. Use when you want autonomous goal-tracked execution.
 allowed-tools: Bash(md-review-plus:*) Bash(git:*) Read Glob Grep Write AskUserQuestion Skill
+effort: high
 ---
 
 # Brainstorm (Goal-Oriented)

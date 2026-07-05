@@ -2,6 +2,7 @@
 name: plan-goal
 description: Goal-oriented plan — create a bite-sized implementation plan AND distill the design's §1 Goal into an inline /goal condition, then emit a copy-paste /clear + /goal + /execute handoff. Pairs with brainstorm-goal.
 allowed-tools: Read Glob Grep Write AskUserQuestion Bash(md-review-plus:*) Bash(git:*) Skill
+effort: high
 ---
 
 # Plan (Goal-Oriented)
@@ -85,13 +86,21 @@ After the plan is written and reviewed, present exactly this — a dual copy-pas
 Plan complete: `docs/plans/YYYY-MM-DD-<feature>-plan.md`
 Goal distilled from: `docs/plans/YYYY-MM-DD-<feature>-design.md` §1
 
-To execute goal-tracked with a clean context, run `/clear` then paste:
+To execute goal-tracked with a clean context, run `/clear`, then set the
+model for the autonomous run:
+
+  /model fable   # Fable 5 is built for goal-driven, long-running autonomy
+  # or /model opus for a cheaper run on shorter plans
+
+then paste:
 
 /goal <distilled proof-command-embedded condition>
 /execute docs/plans/YYYY-MM-DD-<feature>-plan.md
 ```
 
 `/goal` first (sets the session completion condition), then `/execute` (the task Claude works on until the condition holds). Use the actual file paths. The user — not Claude — runs `/goal`.
+
+**Why `/model fable`:** the Claude Code docs pair `/goal` with Fable 5 — "describe the outcome, not the steps… set a goal to keep it working until that outcome holds." Fable 5 sustains long autonomous sessions and self-verifies, which is exactly the `/goal` + `/execute` loop. Opus is the cheaper fallback for shorter plans. Suggest the switch; the user chooses.
 
 ## Rules
 
