@@ -20,7 +20,7 @@ One skill for the full branch lifecycle: create an isolated worktree, do the wor
 
 ## Finishing work — branch completion
 
-1. Verify all tests pass — stop if they don't
+1. Verify all tests pass — if they fail, stop and use `AskUserQuestion` before proceeding
 2. Use `AskUserQuestion` to present four options:
    - **Merge** to base branch locally
    - **Push and create PR** via `gh pr create`
@@ -28,14 +28,3 @@ One skill for the full branch lifecycle: create an isolated worktree, do the wor
    - **Discard** — requires typing "discard" to confirm
 3. Execute the chosen option
 4. Clean up worktree for merge and discard options
-
-## Safeguards
-
-- Verify the worktree directory is in `.gitignore` before creating
-- Verify directory is ignored for project-local
-- Run baseline tests and confirm they pass
-- Use `AskUserQuestion` when tests fail before proceeding
-- Resolve ambiguous directory locations by checking CLAUDE.md, then asking
-- Follow directory priority: existing > CLAUDE.md > ask
-- Auto-detect and run project setup
-- Verify clean test baseline

@@ -13,7 +13,7 @@ Become expertly familiar with the codebase — read the relevant files, docs, re
 
 Even simple projects require a design. The design can be short, but it must exist, carry a verifiable Goal, and be approved.
 
-You *** MUST ALWAYS *** use md-review-plus for reviewing the design doc. No exceptions. The user must have the opportunity to comment in the browser, not just approve/reject via `AskUserQuestion`.
+Always review the design doc with md-review-plus — no exceptions. The user must have the opportunity to comment in the browser, not just approve/reject via `AskUserQuestion`.
 
 ## Flow
 
@@ -46,7 +46,7 @@ The terminal state is invoking the `plan-goal` skill. No other skill.
 
 ## Checklist
 
-Create a TodoWrite item for each:
+Create a tracked task (TaskCreate) for each:
 
 1. Explore project context — files, docs, recent commits
 2. Interview user via `AskUserQuestion` until design is fully understood

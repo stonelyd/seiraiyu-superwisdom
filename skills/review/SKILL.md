@@ -11,7 +11,7 @@ Two modes: requesting a review and responding to review feedback.
 ## Requesting review
 
 1. Get the git diff range (SHAs or branch comparison)
-2. Dispatch `superpowers:code-reviewer` agent with:
+2. Dispatch a code-review subagent via the Agent tool (use a dedicated code-reviewer agent type if one is available, else general-purpose) with:
    - What was implemented
    - Plan or requirements reference
    - Diff range

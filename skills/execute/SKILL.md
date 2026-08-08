@@ -12,7 +12,7 @@ Load the plan, review it critically, execute using teams for independent work an
 
 1. Read the plan file completely
 2. Review critically — raise concerns before writing any code
-3. Create TodoWrite tracker for all tasks
+3. Create a tracked task (TaskCreate) for each plan task
 4. Identify which tasks are independent vs dependent
 
 ## Execution
