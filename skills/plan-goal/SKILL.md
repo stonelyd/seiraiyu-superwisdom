@@ -17,7 +17,7 @@ Assume the engineer executing this plan has zero codebase context. Give them eve
 2. Break work into bite-sized tasks. Each task = one action (write test, run test, implement, verify, commit).
 3. If anything is ambiguous, use `AskUserQuestion` to clarify before writing the plan.
 4. Write the full plan to `docs/plans/YYYY-MM-DD-<feature>-plan.md`.
-5. Review with `md-review-plus <file> --review`. Iterate until approved.
+5. Review with `md-review-plus <file> --review --remote`. Always display the review URL it prints to the user. Iterate until approved.
 6. **Distill the Goal** (see below) and present the dual handoff.
 
 ## Plan header

@@ -52,7 +52,7 @@ Create a tracked task (TaskCreate) for each:
 2. Interview user via `AskUserQuestion` until design is fully understood
 3. Propose the robust approach via `AskUserQuestion` for approval
 4. Write complete design spec to `docs/plans/YYYY-MM-DD-<topic>-design.md`, with §1 a machine-verifiable Goal
-5. Review via `md-review-plus <file> --review`, iterate until approved
+5. Review via `md-review-plus <file> --review --remote`, show the user the review URL, iterate until approved
 6. Commit the design doc
 7. Hand off to `plan-goal` skill
 
@@ -101,7 +101,7 @@ Never write the Goal as prose or aspirations. If you don't yet know the proof co
 
 ## Review
 
-Review with `md-review-plus <file> --review`. User approves, rejects, or comments in the browser. Iterate until approved. Commit when done.
+Review with `md-review-plus <file> --review --remote`. The command prints a review URL — always display it to the user as soon as it appears, so they can open the review in their browser; never leave it buried in tool output. User approves, rejects, or comments in the browser. Iterate until approved. Commit when done.
 
 ## Principles
 
